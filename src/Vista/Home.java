@@ -31,25 +31,26 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
-        init();
+//        init();
         setLocationRelativeTo(null);
         setIconImage(new ImageIcon(getClass().getResource("/Img/IconoITRSP.PNG")).getImage());
         rsscalelabel.RSScaleLabel.setScaleLabel(jLabel1, "src/Img/LogoHome.PNG");
         getContentPane().setBackground(new Color(60,63,65));
     }
-    private void init(){
-        layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
-        menuPanel.setLayout(layout);
-        menu = new Menu();
-        menu.addEvent(new EventMenuSelected(){
-           @Override
-           public void menuSelected(int menuIndex, int subMenuIndex) {
-               System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
-           } 
-        });
-        menu.initMenuItem();
-        menuPanel.add(menu, "w 230!");
-    }
+    String name = "password.txt";
+//    private void init(){
+//        layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
+//        menuPanel.setLayout(layout);
+//        menu = new Menu();
+//        menu.addEvent(new EventMenuSelected(){
+//           @Override
+//           public void menuSelected(int menuIndex, int subMenuIndex) {
+//               System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
+//           } 
+//        });
+//        menu.initMenuItem();
+//        menuPanel.add(menu, "w 230!");
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,22 +62,29 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        menuPanel = new javax.swing.JLayeredPane();
-        jPanel2 = new RoundedPanel(100, Color.GREEN);
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator1 = new javax.swing.JSeparator();
-        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        rSFotoCircle1 = new rojerusan.RSFotoCircle();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio");
         setBackground(new java.awt.Color(26, 26, 27));
         setBounds(getBounds());
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(getSize());
         setMinimumSize(new java.awt.Dimension(600, 400));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
@@ -87,23 +95,6 @@ public class Home extends javax.swing.JFrame {
         });
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        menuPanel.setBackground(new java.awt.Color(60, 63, 65));
-        menuPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(menuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 170, 360));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 300, 330));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,31 +109,70 @@ public class Home extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 270, 330));
-        jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 8, 880, -1));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 230, 420));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 219, 40));
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 219, 40));
-        jPanel1.add(rSFotoCircle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, 30, 30));
+        jButton1.setBackground(new java.awt.Color(196, 152, 0));
+        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Realizar publicacion");
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 63, 220, 30));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 520, 380));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Finalizacion de practicas profesionales: [Dias]");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/perfil.png"))); // NOI18N
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 32, 32));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/memorandum.png"))); // NOI18N
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 32, 32));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/casa-inteligente.png"))); // NOI18N
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 32, 32));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/estadisticas.png"))); // NOI18N
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 32, 32));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/equipo.png"))); // NOI18N
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 32, 32));
+        jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 790, 10));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/calendario.png"))); // NOI18N
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 32, 32));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/lista-de-verificacion.png"))); // NOI18N
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 32, 32));
+
+        jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel10.setText("Usuario");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, -1, -1));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/iniciar-sesion.png"))); // NOI18N
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 32, 32));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSeparator1))
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 791, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,6 +182,14 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowLostFocus
 
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        // TODO add your handling code here:
+        Vista.Login.deletepassword(name);
+        Login open = new Login();
+        open.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jLabel11MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -159,6 +197,7 @@ public class Home extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         try{
             UIManager.setLookAndFeel(new FlatDarkLaf());
+            UIManager.put("Button.arc", 15);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -173,16 +212,24 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLayeredPane menuPanel;
-    private rojerusan.RSFotoCircle rSFotoCircle1;
     // End of variables declaration//GEN-END:variables
     class RoundedPanel extends JPanel
     {

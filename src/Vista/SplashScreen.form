@@ -100,11 +100,11 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="sociales"/>
+            <Property name="text" type="java.lang.String" value="profesionales"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="280" y="140" width="-1" height="-1"/>
+              <AbsoluteConstraints x="250" y="140" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -148,11 +148,11 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Seguimiento de horas"/>
+            <Property name="text" type="java.lang.String" value="Seguimiento de practicas"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="120" width="-1" height="-1"/>
+              <AbsoluteConstraints x="200" y="120" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

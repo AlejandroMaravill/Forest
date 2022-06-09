@@ -68,8 +68,8 @@ public class SplashScreen extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("sociales");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, -1, -1));
+        jLabel6.setText("profesionales");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -83,8 +83,8 @@ public class SplashScreen extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Seguimiento de horas");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, -1, -1));
+        jLabel9.setText("Seguimiento de practicas");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, -1, -1));
 
         jSeparator1.setBackground(new java.awt.Color(196, 152, 0));
         jSeparator1.setForeground(new java.awt.Color(196, 152, 0));

@@ -9,7 +9,12 @@ import SwingComponents.EventMenu;
 import SwingComponents.EventMenuSelected;
 import SwingComponents.ModelMenu;
 import SwingComponents.ScrollBarCustom;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import javax.swing.ImageIcon;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
@@ -40,13 +45,14 @@ public class Menu extends javax.swing.JPanel {
     
     public Menu() {
         initComponents();
-        setOpaque(false);
         sp.getViewport().setOpaque(false);
         sp.setVerticalScrollBar(new ScrollBarCustom());
         layout = new MigLayout("wrap, fillx, insets 0", "[fill]", "[]0[]");
         jPanel1.setLayout(layout);
         initMenuItem();
     }
+    
+    
     
     public void initMenuItem(){
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/Img/lista-de-verificacion.PNG")), "Empresas",
@@ -61,6 +67,16 @@ public class Menu extends javax.swing.JPanel {
     
     private void addMenu(ModelMenu menu) {
         jPanel1.add(new MenuItem(menu, event, event, jPanel1.getComponentCount()));
+    }
+    
+    @Override
+    protected void paintComponent(Graphics grphcs) {
+        Graphics2D g2 = (Graphics2D) grphcs;
+        g2.setRenderingHint (RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        GradientPaint gra = new GradientPaint(0, 0, new Color(196, 152, 0), getWidth(), 0, new Color(234, 199, 78));
+        g2.setPaint(gra);
+        g2.fillRect(0, 0, getWidth(), getHeight());
+        super.paintComponent(grphcs);
     }
 
     private EventMenu getEventmenu(){
@@ -117,8 +133,7 @@ public class Menu extends javax.swing.JPanel {
                 .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
- 
-    
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
