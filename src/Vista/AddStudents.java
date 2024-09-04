@@ -7,8 +7,25 @@ package Vista;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Button;
+import java.awt.Cursor;
+import static java.awt.Frame.HAND_CURSOR;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import Controlador.ControladorAlumnos;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumn;
+import Vista.CreateStudent;
 
 /**
  *
@@ -19,11 +36,37 @@ public class AddStudents extends javax.swing.JFrame {
     /**
      * Creates new form AddStudents
      */
+    DefaultTableModel modelo;
+    CreateStudent vse = new CreateStudent();
+
     public AddStudents() {
         initComponents();
         setLocationRelativeTo(null);
         setIconImage(new ImageIcon(getClass().getResource("/Img/IconoITRSP.PNG")).getImage());
+        jButton1.setCursor(new Cursor(HAND_CURSOR));
+        jButton2.setCursor(new Cursor(HAND_CURSOR));
+        jButton3.setCursor(new Cursor(HAND_CURSOR));
+        jButton5.setCursor(new Cursor(HAND_CURSOR));
+        jButton6.setCursor(new Cursor(HAND_CURSOR));
+        jButton7.setCursor(new Cursor(HAND_CURSOR));
+        String[] titulo = {"Nombre", "Apellido", "Carnet", "Grupo", "Seccion", "Especialidad", "Año"};
+        modelo = new DefaultTableModel(null, titulo);
+        jTable1.setModel(modelo);
+        tabla();
+        jButton8.setVisible(false);
+        jButton3.setVisible(true);
+        jButton5.setVisible(true);
+        jButton9.setVisible(false);
+//        jButton5.setEnabled(false);
     }
+    JComboBox Modalidad = new JComboBox();
+    JComboBox especialidad = new JComboBox();
+    JComboBox grupo = new JComboBox();
+    JComboBox seccion = new JComboBox();
+    JComboBox empresa = new JComboBox();
+    JComboBox estado = new JComboBox();
+    JComboBox Docente = new JComboBox();
+    ControladorAlumnos objal = new ControladorAlumnos();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,17 +78,19 @@ public class AddStudents extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton4 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
+        jButton5 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         jButton4.setBackground(new java.awt.Color(196, 152, 0));
         jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -55,22 +100,101 @@ public class AddStudents extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Agregar estudiantes");
+        setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton3.setBackground(new java.awt.Color(196, 152, 0));
+        jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Actualizar");
+        jButton3.setBorderPainted(false);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 110, -1));
+
+        jButton6.setBackground(new java.awt.Color(196, 152, 0));
+        jButton6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setText("Eliminar todo");
+        jButton6.setBorderPainted(false);
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 150, -1));
 
         jButton1.setBackground(new java.awt.Color(196, 152, 0));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Agregar alumnos");
         jButton1.setBorderPainted(false);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 310, 150, -1));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 150, -1));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("una vez subidos los alumnos, se mostraran abajo de este apartado");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 430, 20));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 10));
+        jButton5.setBackground(new java.awt.Color(196, 152, 0));
+        jButton5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setText("Eliminar");
+        jButton5.setBorderPainted(false);
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 110, -1));
 
+        jButton8.setBackground(new java.awt.Color(196, 152, 0));
+        jButton8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(255, 255, 255));
+        jButton8.setText("Aceptar");
+        jButton8.setBorderPainted(false);
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 110, -1));
+
+        jButton9.setBackground(new java.awt.Color(196, 152, 0));
+        jButton9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(255, 255, 255));
+        jButton9.setText("Aceptar");
+        jButton9.setBorderPainted(false);
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 110, -1));
+
+        jButton2.setBackground(new java.awt.Color(196, 152, 0));
+        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Cargar");
+        jButton2.setBorderPainted(false);
+
+        jButton7.setBackground(new java.awt.Color(196, 152, 0));
+        jButton7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setText("Regresar");
+        jButton7.setBorderPainted(false);
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
+
+        jTable1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -84,64 +208,119 @@ public class AddStudents extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 600, 310));
-
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Subir alumnos en formato de archivo delimitado por comas [csv]");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 410, 20));
-
-        jButton2.setBackground(new java.awt.Color(196, 152, 0));
-        jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Cargar");
-        jButton2.setBorderPainted(false);
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 90, -1));
-
-        jButton3.setBackground(new java.awt.Color(196, 152, 0));
-        jButton3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Actualizar");
-        jButton3.setBorderPainted(false);
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 100, 100, -1));
-
-        jButton5.setBackground(new java.awt.Color(196, 152, 0));
-        jButton5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Eliminar");
-        jButton5.setBorderPainted(false);
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 170, 100, -1));
-
-        jButton6.setBackground(new java.awt.Color(196, 152, 0));
-        jButton6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Eliminar todo");
-        jButton6.setBorderPainted(false);
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 240, 150, -1));
+        jLabel6.setText("Subir alumnos en formato de archivo delimitado por comas, una vez cargados se mostraran abajo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jSeparator1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                        .addGap(74, 74, 74)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton7))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        // TODO add your handling code here:
+        Home abrir = new Home();
+        abrir.setVisible(true);
+
+        dispose();
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        CreateStudent open = new CreateStudent();
+        open.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        updtbl();
+        jButton8.setVisible(true);
+        jButton3.setVisible(false);
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        // TODO add your handling code here:
+//        String nombre, apellido, carnet;
+//        for (int i = 0; i < jTable1.getRowCount(); i++) {
+//             Boolean checked=Boolean.valueOf(jTable1.getValueAt(i, 11).toString());
+//            if (checked.equals(true)) {
+//                nombre = (String) jTable1.getValueAt(i, 0);
+//                apellido = (String) jTable1.getValueAt(i, 1);
+//                carnet = (String) jTable1.getValueAt(i, 2);
+//                String esp = (String) jTable1.getValueAt(i, 4);
+//                JOptionPane.showMessageDialog(null, nombre + " " + apellido + " " + carnet + " " + esp);
+//            }else{
+//                JOptionPane.showMessageDialog(null, "falso");
+//            }
+//        }
+        update();
+        jButton3.setVisible(true);
+        jButton8.setVisible(false);
+        tblact();
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+        // TODO add your handling code here:
+        msgcnf();
+        jButton5.setVisible(true);
+        jButton9.setVisible(false);
+    }//GEN-LAST:event_jButton9MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // TODO add your handling code here:
+        dltbl();
+        jButton5.setVisible(false);
+        jButton9.setVisible(true);
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        // TODO add your handling code here:
+        delall();
+    }//GEN-LAST:event_jButton6MouseClicked
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        try{
+        try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
             UIManager.put("Button.arc", 15);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -154,6 +333,269 @@ public class AddStudents extends javax.swing.JFrame {
         });
     }
 
+    void tblact() {
+        String[] titulo = {"Nombre", "Apellido", "Carnet", "Grupo", "Seccion", "Especialidad", "Año"};
+        modelo = new DefaultTableModel(null, titulo);
+        jTable1.setModel(modelo);
+        tabla();
+    }
+
+    Boolean empty() {
+        int j = 0;
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            if (jTable1.getValueAt(i, 0).toString().equals("") || jTable1.getValueAt(i, 1).toString().equals("") || jTable1.getValueAt(i, 2).toString().equals("") || jTable1.getValueAt(i, 10).toString().equals("")) {
+                j++;
+            }
+        }
+        if (j != 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    void update() {
+        //(String) convierte los valores a string
+        if (empty() == true) {
+            int j = 0;
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                Boolean checked = Boolean.valueOf(jTable1.getValueAt(i, 11).toString());
+                if (checked.equals(true)) {
+                    objal.nombre = (String) jTable1.getValueAt(i, 0);
+                    objal.apellido = (String) jTable1.getValueAt(i, 1);
+                    objal.carnet = (String) jTable1.getValueAt(i, 2);
+                    objal.modalidad = objal.ObtenerModalidad((String) jTable1.getValueAt(i, 3));
+                    objal.especialidad = objal.ObtenerEspecialidad((String) jTable1.getValueAt(i, 4));
+                    objal.grupo = objal.ObtenerGrupo((String) jTable1.getValueAt(i, 5));
+                    objal.seccion = objal.ObtenerSeccion((String) jTable1.getValueAt(i, 6));
+                    objal.empresa = objal.ObtenerEmpresa((String) jTable1.getValueAt(i, 7));
+                    objal.estado = objal.ObtenerEstado((String) jTable1.getValueAt(i, 8));
+                    objal.docente = objal.ObtenerDocente((String) jTable1.getValueAt(i, 9));
+                    objal.year = (String) jTable1.getValueAt(i, 10);
+                    int valor = objal.ActualizarAlumno();
+                    if (valor == 1) {
+                        j++;
+                    }
+                }
+            }
+            if (j != 0) {
+                JOptionPane.showMessageDialog(null, "Se actualizo el registro exitosamente", "Proceso Completo", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Ocurro un error al intentar actualizar el registro", "Proceso Incompleto", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Existen capos vacios, por favor complete toda la informacion requerida", "Informacion Incompleta", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    void delstd() {
+        int j = 0;
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            Boolean checked = Boolean.valueOf(jTable1.getValueAt(i, 7).toString());
+            if (checked.equals(true)) {
+                objal.carnet = (String) jTable1.getValueAt(i, 2);
+                objal.id = objal.ObtenerEstudiante((String) jTable1.getValueAt(i, 2));
+                int value = objal.Delptc();
+                int cont = objal.Delcont();
+                int ast = objal.Delast();
+                int crt = objal.Delcrt();
+                int valor = objal.DelStdnt();
+                if (valor == 1 && value == 1 && cont == 1 && ast == 1 && crt == 1) {
+                    j++;
+                }
+            }
+        }
+        if (j != 0) {
+            JOptionPane.showMessageDialog(null, "Se elimino el registro exitosamente", "Proceso Completo", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocurro un error al intentar eliminar el registro", "Proceso Incompleto", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    void delall(){
+        int respuesta = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar a todos los alumnos ? (Esto incluye sus contactos y documentos) ", "Proceso de eliminacion", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if (respuesta == 0) {
+            int valor = objal.Delall();
+            if (valor == 1) {
+                JOptionPane.showMessageDialog(null, "Se eliminaron los registros exitosamente", "Proceso Completo", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Ocurrio un error al intentar eliminar los registros", "Proceso Incompleto", JOptionPane.INFORMATION_MESSAGE);
+            }
+            tblact();
+            jButton5.setVisible(true);
+            jButton9.setVisible(false);
+        }else{
+            tblact();
+            jButton5.setVisible(true);
+            jButton9.setVisible(false);
+        }
+    }
+    
+    void msgcnf() {
+        String nombre = "";
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            Boolean checked = Boolean.valueOf(jTable1.getValueAt(i, 7).toString());
+            if (checked.equals(true)) {
+                nombre = nombre + ", " + jTable1.getValueAt(i, 0).toString() + " " + jTable1.getValueAt(i, 1).toString();
+            }
+        }
+        int respuesta = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar a los alumnos " + nombre + " ?", "Proceso de eliminacion", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if (respuesta == 0) {
+            delstd();
+            tblact();
+            jButton5.setVisible(true);
+            jButton9.setVisible(false);
+
+        } else {
+            tblact();
+            jButton5.setVisible(true);
+            jButton9.setVisible(false);
+        }
+    }
+
+    final void updtbl() {
+        String[] titulo = {"Nombre", "Apellido", "Carnet", "Modalidad", "Especialidad", "Grupo", "Seccion", "Empresa", "Estado", "Docente", "Año", "Actualizar"};
+        modelo = new DefaultTableModel(null, titulo) {
+            public Class<?> getColumnClass(int column) {
+                switch (column) {
+                    case 11:
+                        return Boolean.class;
+                    default:
+                        return String.class;
+                }
+            }
+        };
+        jTable1.setModel(modelo);
+        jTable1.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(Modalidad));
+        jTable1.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(especialidad));
+        jTable1.getColumnModel().getColumn(5).setCellEditor(new DefaultCellEditor(grupo));
+        jTable1.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(seccion));
+        jTable1.getColumnModel().getColumn(7).setCellEditor(new DefaultCellEditor(empresa));
+        jTable1.getColumnModel().getColumn(8).setCellEditor(new DefaultCellEditor(estado));
+        jTable1.getColumnModel().getColumn(9).setCellEditor(new DefaultCellEditor(Docente));
+        vse.cmb();
+        cmbEmpEst();
+        tblupdt();
+    }
+
+    void tblupdt() {
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        try {
+            ResultSet rs = objal.MostrarAlumno();
+            while (rs.next()) {
+                Object[] oValores = {rs.getString("Nombres"), rs.getString("apellidos"), rs.getString("carnet"), rs.getString("modalidad"), rs.getString("especialidad"), rs.getString("grupo"), rs.getString("seccion"), rs.getString("empresa"), rs.getString("estado"), rs.getString("docente"), rs.getString("año"), true};
+                modelo.addRow(oValores);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos de la base", "Error de informacion", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    void cmbEmpEst() {
+        try {
+            especialidad.removeAllItems();
+            ResultSet rs = objal.MostrarEspecialidad();
+            while (rs.next()) {
+                especialidad.addItem(rs.getString("especialidad"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar las especialidades, revise su conexion", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            grupo.removeAllItems();
+            ResultSet rs = objal.MostrarGrupo();
+            while (rs.next()) {
+                grupo.addItem(rs.getString("grupo"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los grupos, revise su conexion", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            seccion.removeAllItems();
+            ResultSet rs = objal.MostrarSeccion();
+            while (rs.next()) {
+                seccion.addItem(rs.getString("seccion"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar las secciones, revise su conexion", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+
+        }
+        try {
+            Docente.removeAllItems();
+            ResultSet rs = objal.MostrarDocente();
+            while (rs.next()) {
+                Docente.addItem(rs.getString("docente"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los docentes, revise su conexion", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+
+        }
+        try {
+            Modalidad.removeAllItems();
+            ResultSet rs = objal.MostrarModalidad();
+            while (rs.next()) {
+                Modalidad.addItem(rs.getString("modalidad"));
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar las modalidades, revise su conexion", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+
+        }
+        try {
+            empresa.removeAllItems();
+            ResultSet rs = objal.MostrarEmpresa();
+            while (rs.next()) {
+                empresa.addItem(rs.getString("empresa"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar las empresas, revise su conexion", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            estado.removeAllItems();
+            ResultSet rs = objal.MostrarEstado();
+            while (rs.next()) {
+                estado.addItem(rs.getString("estado"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los estados, revise su conexion", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    final void dltbl() {
+        String[] titulo = {"Nombre", "Apellido", "Carnet", "Grupo", "Seccion", "Especialidad", "Año", "Eliminar"};
+        modelo = new DefaultTableModel(null, titulo) {
+            public Class<?> getColumnClass(int column) {
+                switch (column) {
+                    case 7:
+                        return Boolean.class;
+                    default:
+                        return String.class;
+                }
+            }
+        };
+        jTable1.setModel(modelo);
+        tabla();
+    }
+
+    final void tabla() {
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        try {
+            ResultSet rs = objal.MostrarAlumno();
+            while (rs.next()) {
+                Object[] oValores = {rs.getString("Nombres"), rs.getString("apellidos"), rs.getString("carnet"), rs.getString("grupo"), rs.getString("seccion"), rs.getString("especialidad"), rs.getString("año"), true};
+                modelo.addRow(oValores);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos de la base", "Error de informacion", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -161,9 +603,11 @@ public class AddStudents extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;

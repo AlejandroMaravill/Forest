@@ -5,11 +5,25 @@
  */
 package Vista;
 
+import Controlador.ControladorEmpresa;
 import SwingComponents.TextPrompt;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Cursor;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.sql.ResultSet;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,15 +34,44 @@ public class AddEnterprise extends javax.swing.JFrame {
     /**
      * Creates new form AddEnterprise
      */
+    DefaultTableModel modelo;
+
     public AddEnterprise() {
         initComponents();
         setLocationRelativeTo(null);
-        setIconImage(new ImageIcon(getClass().getResource("/Img/IconoITRSP.PNG")).getImage());
-        TextPrompt ph = new TextPrompt("Enterprise Services....", jTextField2);
-        TextPrompt ph2 = new TextPrompt("1231", jTextField3);
-        TextPrompt ph3 = new TextPrompt("Nombre Nombre Apellido Apellido", jTextField1);
-        TextPrompt ph4 = new TextPrompt("El Salvador, San Salvador ........", jTextArea1);
-        jButton1.setCursor(new Cursor(HAND_CURSOR));
+        lbLogoTitulo.setVisible(false);
+        lbIcon.setVisible(false);
+        btnActualizarLogo.setVisible(false);
+        String[] Titulos = {"id_empresa", "empresa", "Numero tributario", "Representante", "direccion", "estado empresa"};
+        modelo = new DefaultTableModel(null, Titulos);
+        TablaEmpresa.setModel(modelo);
+        CargarTabla();
+    }
+    ResultSet CargadoEmpresas;
+    ControladorEmpresa obj = new ControladorEmpresa();
+
+    public void CargarTabla() {
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        try {
+            CargadoEmpresas = obj.CargarEmpresas();
+            while (CargadoEmpresas.next()) {
+                Object[] Datos = {CargadoEmpresas.getString("id_empresa"), CargadoEmpresas.getString("empresa"), CargadoEmpresas.getString("numero_tributario"), CargadoEmpresas.getString("representante_legal"), CargadoEmpresas.getString("direccion"), CargadoEmpresas.getString("id_estado_empresa"), CargadoEmpresas.getBytes("logo")};
+                modelo.addRow(Datos);
+//                CARGAR IMAGEN DESDE LA BASE
+//                try {
+//                    byte[] bi = CargadoEmpresas.getBytes("logo");
+//                    BufferedImage image = null;
+//                    InputStream in = new ByteArrayInputStream(bi);
+//                    image = ImageIO.read(in);
+//                    ImageIcon imgi = new ImageIcon(image.getScaledInstance(60, 60, 0));
+//                    lbIcon.setIcon(imgi);
+//                } catch (Exception e) {
+//                }
+            }
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -42,98 +85,223 @@ public class AddEnterprise extends javax.swing.JFrame {
 
         rSFotoSquareResize1 = new rojerusan.RSFotoSquareResize();
         jPanel1 = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        Panel1 = new javax.swing.JPanel();
+        btnActualizarLogo = new javax.swing.JButton();
+        lbIcon = new javax.swing.JLabel();
+        lbLogoTitulo = new javax.swing.JLabel();
+        btnActualizarLogo1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TablaEmpresa = new javax.swing.JTable();
+        txtId = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        MenuGestion = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Agregar empresa");
+        setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, -1));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ingrese la direccion de la sede central]");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 270, 20));
+        Panel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        Panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 300, -1));
+        btnActualizarLogo.setBackground(new java.awt.Color(196, 152, 0));
+        btnActualizarLogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnActualizarLogo.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizarLogo.setText("Aceptar");
+        btnActualizarLogo.setBorderPainted(false);
+        btnActualizarLogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarLogoActionPerformed(evt);
+            }
+        });
+        Panel1.add(btnActualizarLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Nombre de la empresa");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 150, 20));
+        lbIcon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        Panel1.add(lbIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 180, 200));
 
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 300, -1));
+        lbLogoTitulo.setText("Logo");
+        Panel1.add(lbLogoTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Numero tributario ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 20));
+        btnActualizarLogo1.setBackground(new java.awt.Color(196, 152, 0));
+        btnActualizarLogo1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnActualizarLogo1.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizarLogo1.setText("Subir Logo");
+        btnActualizarLogo1.setBorderPainted(false);
+        btnActualizarLogo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarLogo1ActionPerformed(evt);
+            }
+        });
+        Panel1.add(btnActualizarLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
 
-        jTextField3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 300, -1));
+        jPanel1.add(Panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 40, 220, 490));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Nombre completo del representante legal");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 270, 20));
+        TablaEmpresa.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        TablaEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaEmpresaMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(TablaEmpresa);
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Direccion [si posee muchos establecimientos");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 290, 20));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 820, 490));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtId.setEditable(false);
+        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 10, 40, -1));
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 300, 90));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 580));
 
-        jButton1.setBackground(new java.awt.Color(196, 152, 0));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Agregar");
-        jButton1.setBorderPainted(false);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, -1, -1));
+        jMenu1.setText("Regresar");
+        jMenu1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jMenuBar1.add(jMenu1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
-        );
+        MenuGestion.setText("Gestionar");
+        MenuGestion.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+
+        jMenuItem1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jMenuItem1.setText("Actualizar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        MenuGestion.add(jMenuItem1);
+
+        jMenuItem2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jMenuItem2.setText("Eliminar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        MenuGestion.add(jMenuItem2);
+
+        jMenuBar1.add(MenuGestion);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void TablaEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaEmpresaMouseClicked
+        // TODO add your handling code here:
+        lbLogoTitulo.setVisible(true);
+        lbIcon.setVisible(true);
+        btnActualizarLogo.setVisible(true);
+        SeleccionarLogo();
+
+
+    }//GEN-LAST:event_TablaEmpresaMouseClicked
+
+    //este es para traer el logo de la empresa y mostrarlo en eol label "LbIcon"
+    void SeleccionarLogo() {
+        int fila = TablaEmpresa.getSelectedRow();
+        int Id = Integer.parseInt(TablaEmpresa.getValueAt(fila, 0).toString());
+        txtId.setText(String.valueOf(Id));
+        ControladorEmpresa.idempresa = Integer.parseInt(txtId.getText());
+        try {
+            ResultSet rs;
+            rs = obj.CargarImagen();
+            while (rs.next()) {
+                try {
+                    byte[] bi = rs.getBytes("logo");
+                    BufferedImage image = null;
+                    InputStream in = new ByteArrayInputStream(bi);
+                    image = ImageIO.read(in);
+                    ImageIcon imgi = new ImageIcon(image.getScaledInstance(180, 180, 0));
+                    lbIcon.setIcon(imgi);
+                } catch (Exception e) {
+                    lbIcon.setIcon(null);
+                    lbIcon.setText("No hay logo para esta empresa");
+
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        // TODO add your handling code here:
+        lbLogoTitulo.setVisible(false);
+        lbIcon.setVisible(false);
+        btnActualizarLogo.setVisible(false);
+    }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void btnActualizarLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarLogoActionPerformed
+        // TODO add your handling code here:
+        //PENDIENTE
+        JFileChooser j = new JFileChooser();
+        FileNameExtensionFilter fil = new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
+        j.setFileFilter(fil);
+
+        int s = j.showOpenDialog(this);
+        if(s == JFileChooser.APPROVE_OPTION){
+            String ruta = j.getSelectedFile().getAbsolutePath();
+            rsscalelabel.RSScaleLabel.setScaleLabel(lbIcon, ruta);
+
+            //Conversion de imagen a byte
+        File ubicaion = new File(ruta);
+        try {
+            byte [] imagen = new byte [(int) ruta.length()];
+            InputStream input = new FileInputStream(ruta);
+            input.read(imagen);
+            obj.Logo = imagen;
+            JOptionPane.showMessageDialog(null, "Imagen paso con exito" + imagen);
+
+            if (obj.InsertarEmpresa() == true) {
+                JOptionPane.showMessageDialog(null,"Empresa agregada exitosamente");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo pasar la imagen");
+            obj.Logo = null;
+            if (obj.InsertarEmpresa() == true) {
+                JOptionPane.showMessageDialog(null,"Empresa agregada exitosamente");
+            }
+        }
+        }
+    }//GEN-LAST:event_btnActualizarLogoActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void btnActualizarLogo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarLogo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizarLogo1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        try{
+        try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
-            UIManager.put( "Button.arc", 15 );
-        } catch (Exception e){
+            UIManager.put("Button.arc", 15);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -146,19 +314,20 @@ public class AddEnterprise extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenu MenuGestion;
+    private javax.swing.JPanel Panel1;
+    private javax.swing.JTable TablaEmpresa;
+    private javax.swing.JButton btnActualizarLogo;
+    private javax.swing.JButton btnActualizarLogo1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbIcon;
+    private javax.swing.JLabel lbLogoTitulo;
     private rojerusan.RSFotoSquareResize rSFotoSquareResize1;
+    private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }

@@ -35,9 +35,6 @@ public class Login extends javax.swing.JFrame {
         setIconImage(new ImageIcon(getClass().getResource("/Img/IconoITRSP.PNG")).getImage());
         rsscalelabel.RSScaleLabel.setScaleLabel(jLabel1, "src/Img/Logo2.PNG");
         rsscalelabel.RSScaleLabel.setScaleLabel(jLabel4, "src/Img/fondo.PNG");
-        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel5, "src/Img/usu.PNG");
-        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel6, "src/Img/olvi.PNG");
-        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel7, "src/Img/contra.PNG");
         rsscalelabel.RSScaleLabel.setScaleLabel(jLabel10, "src/Img/bg_login.PNG");
         Vista.settings.leer();
                
@@ -53,6 +50,8 @@ public class Login extends javax.swing.JFrame {
         jTextField1.setBackground(null);
         jPasswordField1.setBorder(null);
         jPasswordField1.setBackground(null);
+        jLabel8.setCursor(new Cursor(HAND_CURSOR));
+        jButton1.setCursor(new Cursor(HAND_CURSOR));
         readpassword();
     }
      int i;
@@ -78,9 +77,6 @@ public class Login extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
@@ -97,12 +93,12 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 405, 74));
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Ingresa tus credenciales para acceder al sistema");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Correo Electronico:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
@@ -124,7 +120,7 @@ public class Login extends javax.swing.JFrame {
                 jTextField1KeyTyped(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 259, 30));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 259, 30));
 
         jPasswordField1.setBackground(new java.awt.Color(22, 49, 57));
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
@@ -132,14 +128,14 @@ public class Login extends javax.swing.JFrame {
                 jPasswordField1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 259, 31));
+        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 259, 31));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Contraseña:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
-        jCheckBox1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jCheckBox1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setText("Recordarme");
         jCheckBox1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -152,9 +148,9 @@ public class Login extends javax.swing.JFrame {
                 jCheckBox1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
+        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Establecer servidor");
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -162,20 +158,20 @@ public class Login extends javax.swing.JFrame {
                 jLabel8MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(196, 152, 0));
-        jLabel11.setText("Olvide mi contraseña");
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("¿Olvido su contraseña?");
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel11MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(196, 152, 0));
-        jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Iniciar Sesión");
         jButton2.setBorderPainted(false);
@@ -184,23 +180,24 @@ public class Login extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, 177, 41));
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 30, 30));
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 30, 30));
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, 20, 20));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 120, 30));
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 940, 83));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 260, 10));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 260, 10));
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 460, 580));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 260, 10));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 260, 10));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 10));
 
-        jButton1.setText("jButton1");
+        jButton1.setBackground(new java.awt.Color(196, 152, 0));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Test Connection");
+        jButton1.setBorderPainted(false);
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -361,11 +358,14 @@ public class Login extends javax.swing.JFrame {
         }
     }
     
-    public static void deletepassword(String name){
-        try {
-            Process process = Runtime.getRuntime().exec("cmd /C start /B /wait del " + name);
-        } catch (IOException ioe) {
-            System.out.println(ioe);
+    public static void delete(String name){
+        File file = new File(name);
+        if (file.isFile()) {
+            try {
+                file.delete();
+            } catch (Exception e) {
+                System.out.println("Error al eliminar el archivo");
+            }
         }
     }
     
@@ -397,9 +397,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
